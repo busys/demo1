@@ -1,0 +1,358 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+	<style>
+		html,body{
+			background: #a580ea;
+			height: 100%;
+			position: relative;
+		}
+		.mui-bar{
+			background: none;
+			box-shadow: none;
+		}
+		header a{
+			color: #fff;
+		}
+		.bigBox{
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.bigBox .gameBox{
+			/*border: 1px solid red;*/
+			width: 80%;
+		}
+		.bigBox .gameBox .gameCon{
+			width: 100%;
+			height: 80vw;
+			
+			border-radius: 8px;
+			background: #b7ada1;
+			
+		}
+		.gameBox>div:last-child{
+			margin-top: 30px;
+			display: flex;
+			justify-content: space-between;
+		}
+		.gameCon{
+			position: relative;
+		}
+		.gameCon .br{
+			width:22.5%;
+			height:22.5%;
+			border-radius: 8px;
+			background: #ccc0b4;
+			float: left;
+			margin-left: 2%;
+			margin-top: 2%;
+		}
+		.gameCon div[class^='gr']{
+			width:22.5%;
+			height:22.5%;
+			border-radius: 8px;
+			position: absolute;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.gameCon div[class^='gr1']{
+			top: 2%;
+		}
+		.gameCon div[class^='gr2']{
+			top: 26.5%;
+		}
+		.gameCon div[class^='gr3']{
+			top: 51%;
+		}
+		.gameCon div[class^='gr4']{
+			top: 75.5%;
+		}
+		.gameCon div[class$='1']{
+			left: 2%;
+		}
+		.gameCon div[class$='2']{
+			left: 26.5%;
+		}
+		.gameCon div[class$='3']{
+			left: 51%;
+		}
+		.gameCon div[class$='4']{
+			left: 75.5%;
+		}
+		.gameCon div[data-num="0"]{
+			background:none;
+		}
+		.gameCon div[data-num="2"]{
+			background: #eee4da;
+		}
+		.gameCon div[data-num="4"]{
+			background: #ece0c8;
+		}
+		.gameCon div[data-num="8"]{
+			background: #f2b179;
+		}
+		.gameCon div[data-num="16"]{
+			background: #ec8d53;
+		}
+		.gameCon div[data-num="32"]{
+			background: #b77127;
+		}
+		.gameCon div[data-num="64"]{
+			background: #f3bf29;
+		}
+		.gameCon div[data-num="128"]{
+			background: #c59816;
+		}
+		.gameCon div[data-num="256"]{
+			background: #f2cf4d;
+		}
+		.gameCon div[data-num="512"]{
+			background: #22ce58;
+		}
+		.gameCon div[data-num="1024"]{
+			background: #22ceaf;
+		}
+		.gameCon div[data-num="2048"]{
+			background: #2295ce;
+		}
+		.alertBox{
+			width: 70vw;
+			height: 50vw;
+			padding: 15px;
+			border-radius: 8px;
+			background: rgba(255,0,0,0.8);
+			position: absolute;
+			left: 0;right: 0;top: 0;bottom: 0;
+			margin:  auto;
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: space-around;
+			
+		}
+		.alertBox h3{
+			text-align: center;
+			color: #fff;
+		}
+		.alertBox button{
+			display: block;
+		}
+		
+	</style>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <a class="mui-icon mui-icon-bars mui-pull-right"></a>		    
+		</header>
+		<div class="bigBox">
+			<div class="gameBox">
+				<div class="gameCon">
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					<div class="br"></div>
+					
+					
+					
+					<div class="gr11"></div>
+					<div class="gr12"></div>
+					<div class="gr13"></div>
+					<div class="gr14"></div>				
+					<div class="gr21"></div>
+					<div class="gr22"></div>
+					<div class="gr23"></div>
+					<div class="gr24"></div>					
+					<div class="gr31"></div>
+					<div class="gr32"></div>
+					<div class="gr33"></div>
+					<div class="gr34"></div>					
+					<div class="gr41"></div>
+					<div class="gr42"></div>
+					<div class="gr43"></div>
+					<div class="gr44"></div>
+					
+				</div>
+				<div >
+					<button>now:<span id="nows">0</span></button>
+					<button>best:<span id="bests">00</span></button>
+				</div>
+			</div>
+		</div>
+		<div class="alertBox mui-hidden">
+			<h3>you lose!</h3>
+			<button type="button" id="playAgain" class="mui-btn mui-btn-success">重新开始</button>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/zepto_1.1.3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="game.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init({
+				beforeback:function(){					
+					var index=plus.webview.getLaunchWebview();
+					mui.fire(index,'changeStatus');					
+				}
+			})
+			mui.plusReady(function(){
+				plus.navigator.setStatusBarBackground("#a580ea");
+			})
+			
+			var menu = null,//*菜单
+				main = null;//主页面
+			var showMenu = false;//*是否显示侧滑菜单的开关，默认是关闭的
+			
+			mui.plusReady(function() {
+				//仅支持竖屏显示
+				plus.screen.lockOrientation("portrait-primary");
+				main = plus.webview.currentWebview();//获取index.html的窗口
+				
+				//给主窗口添加点击遮罩的事件，点击遮罩之后执行关闭菜单的函数
+				main.addEventListener('maskClick', closeMenu);
+				//处理侧滑导航，为了避免和子页面初始化等竞争资源，延迟加载侧滑页面；
+				//200毫秒之后，预加载侧滑菜单窗口
+				setTimeout(function() {
+					
+					menu = mui.preload({
+						id: 'right.html',
+						url: 'right.html',
+						styles: {
+							right: '0',
+							width: '50%',
+//							zindex: -1
+						},
+						show: {
+							aniShow: 'none'
+						}
+					});
+				}, 200);
+			});
+			var isInTransition = false;//是不是正在过渡  的开关
+			/**
+			 * 显示侧滑菜单
+			 */
+			function openMenu() {
+				
+				//当菜单正处于滑动的状态下的时候，不允许再做操作了
+				if (isInTransition) {
+					return;
+				}
+				if (!showMenu) {
+					//侧滑菜单处于隐藏状态，则立即显示出来；
+					isInTransition = true;
+					
+					
+					//menu设置透明遮罩防止点击
+					menu.setStyle({
+						mask: 'rgba(0,0,0,0)'
+					}); 
+					
+					//让侧滑界面出来，并且让主窗口开始侧滑
+					//主窗体开始侧滑并显示遮罩
+						main.setStyle({
+							mask: 'rgba(0,0,0,0)',
+							left: '-50%',
+							transition: {
+								duration: 200
+							}
+						});
+					menu.show('slide-in-right', 200, function() {						
+//						等同于setTimeout
+						mui.later(function() {
+							isInTransition = false;
+							menu.setStyle({
+								mask: "none"
+							}); //移除menu的mask
+						}, 210);
+						showMenu = true;
+					});
+				}
+			};
+			/**
+			 * 关闭菜单
+			 */
+			function closeMenu() {
+				if (isInTransition) {
+					return;
+				}
+				if (showMenu) {
+					//关闭遮罩；
+					//主窗体开始侧滑；
+					isInTransition = true;
+					main.setStyle({
+						mask: 'none',
+						left: '0',
+						transition: {
+							duration: 200
+						}
+					});
+					showMenu = false;
+					//等动画结束后，隐藏菜单webview，节省资源；
+//					mui.later(function() {
+						isInTransition = false;
+						menu.hide('slide-out-right',200);
+//					}, 300);
+				}
+			};
+			//点击左上角侧滑图标，打开侧滑菜单；
+			document.querySelector('.mui-icon-bars').addEventListener('tap', function(e) {
+				if (showMenu) {
+					closeMenu();
+				} else {
+					openMenu();
+				}
+			});
+			//敲击顶部导航，内容区回到顶部
+//			document.querySelector('header').addEventListener('doubletap', function() {
+//				main.children()[0].evalJS('mui.scrollTo(0, 100)');
+//			});
+			//主界面向右滑动，若菜单未显示，则显示菜单；否则不做任何操作
+//			window.addEventListener("swiperight", openMenu);
+//			//主界面向左滑动，若菜单已显示，则关闭菜单；否则，不做任何操作；
+//			window.addEventListener("swipeleft", closeMenu);
+			//侧滑菜单触发关闭菜单命令
+			window.addEventListener("menu:close", closeMenu);
+			window.addEventListener("menu:open", openMenu);
+			//重写mui.menu方法，Android版本menu按键按下可自动打开、关闭侧滑菜单；
+			mui.menu = function() {
+					if (showMenu) {
+						closeMenu();
+					} else {
+						openMenu();
+					}
+				}
+			
+			//首页返回键处理
+			//1、若侧滑菜单显示，则关闭侧滑菜单
+			//2、否则，执行mui框架默认的关闭首页功能
+	
+			var _back = mui.back;
+			mui.back = function() {
+				if (showMenu) {
+					closeMenu();
+				} else {
+					_back();
+				}
+			};
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+	<style>
+		html,body{
+			height: 100%;
+			background: #a580ea;
+		}
+		.logo{
+			width: 60vw;
+			height: 60vw;
+			border-radius: 50%;
+			display: block;
+			margin: 60px auto 40px;
+		}
+		button{
+			display: block!important;
+			width: 60vw;
+			margin: 20px auto;
+		}
+	</style>
+	<body>
+		<img class="logo" src="img/logo.jpg"/>
+		<button id="sortBtn" type="button" class="mui-btn mui-btn-danger">排行榜</button>
+		<button id="aboutBtn" type="button" class="mui-btn mui-btn-danger">关于</button>
+		<button id="back" type="button" class="mui-btn mui-btn-danger">返回游戏</button>
+		<script src="js/mui.min.js"></script>
+		<script src="js/zepto_1.1.3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/touch.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			
+			
+			mui.plusReady(function(){
+				
+				var sort=plus.webview.create('sort.html','sort.html',{width:"50%",top:'0px',bottom:"0px",zindex:2});
+				sort.hide();
+				
+				var about=plus.webview.create('about.html','about.html',{width:"50%",top:'0px',bottom:"0px",zindex:2});
+				about.hide();
+				
+				var flag=true;
+				
+				touch.on("#sortBtn",'tap',function(){
+					if(flag){
+						flag=!flag;
+						about.hide("slide-out-left",300);
+						sort.show("slide-in-left",300,function(){
+							flag=!flag
+						});
+					}
+					
+					
+				})
+				touch.on("#aboutBtn",'tap',function(){
+					if(flag){
+						flag=!flag;
+						sort.hide("slide-out-left",300);
+						about.show("slide-in-left",300,function(){
+							flag=!flag;
+						});
+					}
+					
+				})
+				
+				touch.on("#back",'tap',function(){
+					
+					about.hide("slide-out-left");
+					sort.hide("slide-out-left");
+					var game=plus.webview.getWebviewById('game.html');
+					mui.fire(game,'menu:close')
+				})
+				
+				
+			})
+			
+			
+			
+		</script>
+	</body>
+
+</html>
